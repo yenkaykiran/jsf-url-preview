@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" >
+
+<h:head>
+	<title>URL Previewer</title>
+	<style>
+		.preview-data {
+			border: 1px solid #e5e5e5;
+		}
+		.header {
+		  font-weight: 600;
+		  font-size: 18px;
+		}
+		
+		.description {
+		  white-space: nowrap;
+		  text-overflow: ellipsis;
+		  min-width: 0;
+		  overflow: hidden;
+		}
+		
+		.img-container {
+		  text-align: center;
+		}
+		
+		.img {
+		  object-fit: contain;
+		  width: 100%;
+		  height: 100%;
+		}
+		
+		.domain {
+		  text-transform: uppercase;
+		}
+		.text-container {
+		  display: flex;
+		  flex-direction: column;
+		  min-width: 0;
+		  padding: 10px;
+		  background-color: #f6f6f6;
+		  text-align: left;
+		}
+		
+		.text-container > * + * {
+		  margin-top: 10px;
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<p:panel header="URL Previewer">
+			<h:panelGrid columns="1" cellpadding="4">
+				<p:inputText id="url" value="#{linkPreviewer.url}">
+					<f:ajax event="blur" listener="#{linkPreviewer.getPreview()}" render="urlPreview" />
+				</p:inputText>
+			</h:panelGrid>
+			<!-- h:panelGrid columns="1" cellpadding="4" id="urlPreview">
+				<h:panelGroup layout="block">
+					<p:row>
+					  <p:column col-sm="6" col-md="4">
+					      <h:graphicImage value="#{linkPreviewer.getUrlMeta().getImage()}" styleClass="img" />
+					      <h:outputText value="#{linkPreviewer.getUrlMeta().getTitle()}" styleClass="header" />
+				          <h:outputText value="#{linkPreviewer.getUrlMeta().getDescription()}" styleClass="description" />
+				          <h:outputText value="#{linkPreviewer.getUrlMeta().getDomain()}" styleClass="domain" />
+					  </p:column>
+					</p:row>
+				</h:panelGroup>
+			</h:panelGrid -->
+			
+			<h:panelGrid columns="1" cellpadding="4" id="urlPreview" styleClass="preview-data">
+				<h:graphicImage value="#{linkPreviewer.getUrlMeta().getImage()}" styleClass="img" />
+				<h:outputText value="#{linkPreviewer.getUrlMeta().getTitle()}" styleClass="header" />
+                <h:outputText value="#{linkPreviewer.getUrlMeta().getDescription()}" styleClass="description" />
+                <h:outputText value="#{linkPreviewer.getUrlMeta().getDomain()}" styleClass="domain" />
+			</h:panelGrid>
+		</p:panel>
+
+	</h:form>
+</h:body>
+</html>
